@@ -57,19 +57,11 @@ public class FileReader {
     public ArrayList readAll() {
         //var
         String word;
-        ArrayList stop = new ArrayList();
         ArrayList doc = new ArrayList();
 
         //scanner and array
         try {
             Scanner myScanner = new Scanner(this.fleExample);
-            Scanner stopWords = new Scanner(stopFile);
-
-            while(stopWords.hasNext()){
-                word = stopWords.next();
-                stop.add(word);
-            }
-
 
             while(myScanner.hasNext()) {
                 word = myScanner.next();
@@ -86,11 +78,35 @@ public class FileReader {
             }
 
             myScanner.close();
-            stopWords.close();
         } catch (FileNotFoundException var3) {
             System.out.println(var3.getMessage());
         }
 
         return doc;
     }
+
+    public ArrayList Stopwords(){
+        String word;
+        ArrayList stop = new ArrayList();
+
+        //scanner and array
+        try {
+            Scanner stopWords = new Scanner(stopFile);
+
+            while(stopWords.hasNext()){
+                word = stopWords.next();
+                System.out.println(word + "gay");
+                stop.add(word);
+            }
+
+            stopWords.close();
+        } catch (FileNotFoundException var3) {
+            System.out.println(var3.getMessage());
+        }
+
+        return stop;
+
+    }
+
+
 }
