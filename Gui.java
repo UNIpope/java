@@ -18,6 +18,7 @@ public class Gui extends JFrame implements ActionListener
     JButton choose;
     JButton b1;
     JLabel l1;
+    String out;
 
     //con
     Gui (String title) {
@@ -57,9 +58,12 @@ public class Gui extends JFrame implements ActionListener
 
     public void actionPerformed(ActionEvent e)
     {
+
+        JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+
         if (e.getSource() == choose)
         {
-            JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+
             jfc.setDialogTitle("Select a text file");
             jfc.setAcceptAllFileFilterUsed(false);
             FileNameExtensionFilter filter = new FileNameExtensionFilter("text file", "txt");
@@ -68,12 +72,24 @@ public class Gui extends JFrame implements ActionListener
             int returnValue = jfc.showOpenDialog(null);
             if (returnValue == JFileChooser.APPROVE_OPTION){
                 System.out.println(jfc.getSelectedFile().getPath());
+                String read_in = jfc.getSelectedFile().getPath();
+
+                Data new_data = new Data(read_in);
+                System.out.println(new_data);
+                out = new_data.toString();
             }
+            else{
+                Gui.infoBox("Pick a file please","error");
+            }
+
+
 
         }
         else if (e.getSource() == b1){
-            Gui.infoBox("awnsers boi","Topics:");
+
+            Gui.infoBox(out,"Topics:");
         }
+
 
 
     }

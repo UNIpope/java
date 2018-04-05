@@ -12,9 +12,8 @@ public class Data {
     Map<String, Integer> data = new HashMap<String, Integer>();
 
     //con
-
-    public Data() {
-        String file = "role.txt";
+    public Data(String file) {
+        this.file = file;
         int total;
         FileReader fileReader = new FileReader(file);
         fileReader.openFile();
@@ -31,6 +30,7 @@ public class Data {
 
 
     //meth
+
     public String toString() {
         return "Data{" + "arrayList=" + arrayList + "\nfile='" + file + '\'' + "\nmap='" + data +
         '}';
