@@ -89,12 +89,5 @@ public class Gui extends JFrame implements ActionListener
 
             Gui.infoBox(out,"Topics:");
         }
-
-
-
     }
-
-}
-
-
-
+}//end gui
