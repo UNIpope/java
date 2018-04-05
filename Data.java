@@ -37,11 +37,16 @@ public class Data {
 
         //total num of words
         total = arrayList.size();
+
+        //test print all
         System.out.println(arrayList);
         System.out.println(total);
         for(int i = 0; i < stop_words.length; i ++) {
             System.out.println(stop_words[i]);
         }
+
+        //contains
+
 
 
 
