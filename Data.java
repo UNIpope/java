@@ -1,22 +1,30 @@
+/*
+author: jack duggan
+compiler: intellej
+OS: win 10
+
+desc: this is where any calculations are done
+ */
 package com.assignment;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
+
 
 public class Data {
     //variables
-    ArrayList arrayList;
-    ArrayList stop_wd;
+    ArrayList<String> arrayList;
     String file;
-    Map<String, Integer> data = new HashMap<String, Integer>();
+
 
     //con
     public Data(String file) {
         //var
         this.file = file;
         int total;
+        String word = " ";
+        Map<String, Integer> amount = new HashMap<String, Integer>();
         FileReader fileReader = new FileReader(file);
 
         //stop words
@@ -32,14 +40,38 @@ public class Data {
                 "your", "yours", "yourself", "yourselves"
         };
 
-        //open
+        //open chosen file
         fileReader.openFile();
         arrayList = fileReader.readAll();
 
+        //remove stop words
+        for (int a = 0; a < stop_words.length; a++) {
+
+            if (arrayList.contains( stop_words[a])) {
+                arrayList.remove(stop_words[a]);
+            }
+
+        }//end 4
 
         //total num of words
         total = arrayList.size();
 
+        for(int i = 0; (i <= (arrayList.size() - 1)) ; i++){
+
+            word = arrayList.get(i);
+            System.out.println(word);
+
+            if(amount.containsKey(word)){
+                amount.put(word,(amount.get(word)+1));
+            }
+            else{
+                amount.put(word,1);
+            }//end if
+
+        }//end 4
+        System.out.println(amount);
+
+        /*
         //test print all
         System.out.println(arrayList);
         System.out.println(total);
@@ -47,23 +79,14 @@ public class Data {
             System.out.println(stop_words[i]);
         }
 
-        //contains
-
-
-
-
-
-        //for(int i = 0; i <=(arrayList.size()) ; i++){
-
-          //  data.put(arrayList.get(i).toString(), data.getOrDefault(data.getValue(i) + 1, 0));
-        //}
+        */
 
     }
 
 
     //methods
     public String toString() {
-        return "Data{" + "arrayList=" + arrayList + "\nfile='" + file + '\'' + "\nmap='" + data +
-        '}';
+        //return "Data{" + "arrayList=" + arrayList + "\nfile='" + file + '\'' + "\nmap='" + data + '}';
+        return "the top words: ";
     }
 }//end data

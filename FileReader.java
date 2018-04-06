@@ -50,6 +50,10 @@ public class FileReader {
                 word = word.replaceAll(",", "");
                 word = word.replaceAll(" ", "");
                 word = word.replaceAll("'s", "");
+                word = word.replaceAll("\\?", "");
+                word = word.replaceAll("\\!", "");
+                word = word.replaceAll("\\(", "");
+                word = word.replaceAll("\\)", "");
 
                 if(word != null && word != "\n" && word != " "){
                     doc.add(word);

@@ -1,12 +1,21 @@
+/*
+author: jack duggan
+compiler: intellej
+OS: win 10
+
+desc: this is the gui class
+ */
+
 package com.assignment;
 
+//main gui
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.JOptionPane;
-import java.awt.event.*;
 
+//file opener
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
@@ -18,13 +27,15 @@ public class Gui extends JFrame implements ActionListener
     JButton choose;
     JButton b1;
     JLabel l1;
-    String out;
+    String out = "No data: please open file first";
 
     //con
     Gui (String title) {
         super(title);
-        //set size and layout
-        setSize(800, 600);
+        //set size, loc and layout
+        setSize(270, 80);
+        setLocationRelativeTo(null);
+        setResizable(false);
         setLayout(new FlowLayout());
 
         //file chooser
@@ -63,13 +74,13 @@ public class Gui extends JFrame implements ActionListener
 
         if (e.getSource() == choose)
         {
-
+            //file picker https://www.mkyong.com/swing/java-swing-jfilechooser-example/
             jfc.setDialogTitle("Select a text file");
             jfc.setAcceptAllFileFilterUsed(false);
             FileNameExtensionFilter filter = new FileNameExtensionFilter("text file", "txt");
             jfc.addChoosableFileFilter(filter);
-
             int returnValue = jfc.showOpenDialog(null);
+
             if (returnValue == JFileChooser.APPROVE_OPTION){
                 System.out.println(jfc.getSelectedFile().getPath());
                 String read_in = jfc.getSelectedFile().getPath();
@@ -80,14 +91,10 @@ public class Gui extends JFrame implements ActionListener
             }
             else{
                 Gui.infoBox("Pick a file please","error");
-            }
-
-
-
+            }//end if
         }
         else if (e.getSource() == b1){
-
             Gui.infoBox(out,"Topics:");
-        }
-    }
+        }//end if
+    }//end act listen
 }//end gui
