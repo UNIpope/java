@@ -33,40 +33,28 @@ public class Gui extends JFrame implements ActionListener
     Gui (String title) {
         super(title);
         //set size, loc and layout
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//stops process
         setSize(270, 80);
-        setLocationRelativeTo(null);
+        setLocationRelativeTo(null);//middle of screen
         setResizable(false);
         setLayout(new FlowLayout());
 
-        //file chooser
+        //file chooser button
         choose = new JButton("Open file");
         add(choose);
         choose.addActionListener(this);
 
-        //button
+        //button to show top words
         b1 = new JButton("Enter");
         add(b1);
         b1.addActionListener(this);
-
-        //lable
-        l1 = new JLabel("");
-        add(l1);
-
 
         //make these appear
         setVisible(true);
 
     }
 
-
-
-
-
-    public static void infoBox(String infoMessage, String titleBar)
-    {
-        JOptionPane.showMessageDialog(null, infoMessage, "InfoBox: " + titleBar, JOptionPane.INFORMATION_MESSAGE);
-    }
-
+    //action listener
     public void actionPerformed(ActionEvent e)
     {
 
@@ -85,8 +73,10 @@ public class Gui extends JFrame implements ActionListener
                 System.out.println(jfc.getSelectedFile().getPath());
                 String read_in = jfc.getSelectedFile().getPath();
 
+                //call data class
                 Data new_data = new Data(read_in);
                 System.out.println(new_data);
+                //read in data
                 out = new_data.toString();
             }
             else{
@@ -97,4 +87,10 @@ public class Gui extends JFrame implements ActionListener
             Gui.infoBox(out,"Topics:");
         }//end if
     }//end act listen
+
+    //info box pop up
+    public static void infoBox(String infoMessage, String titleBar)
+    {
+        JOptionPane.showMessageDialog(null, infoMessage, titleBar, JOptionPane.INFORMATION_MESSAGE);
+    }
 }//end gui
