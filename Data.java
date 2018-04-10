@@ -7,6 +7,7 @@ desc: this is where any calculations are done
  */
 package com.assignment;
 
+import javax.swing.*;
 import java.util.*;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -18,15 +19,15 @@ public class Data {
     ArrayList<String> arrayList;
     TreeMap<String, Integer> sortedMap;
     String file;
+    int total;
 
 
     //con
     public Data(String file) {
         //var
         this.file = file;
-        int total;
         String word = " ";
-        HashMap<String, Integer> amount = new HashMap<String, Integer>();
+        HashMap<String, Integer> amount = new HashMap<String, Integer>();//no dupes
         FileReader fileReader = new FileReader(file);
 
         //stop words
@@ -47,16 +48,8 @@ public class Data {
         arrayList = fileReader.readAll();
 
         //remove stop words
+        //convert to object
         arrayList.removeAll(Arrays.asList(stop_words));
-        /*for (int a = 0; a < (arrayList.size()-1); a++) {
-            for (int b = 0; b < stop_words.length; b++) {
-                if (arrayList.get(a) == (stop_words[b])) {
-                    arrayList.remove(a);
-                }
-            }
-        }//end 4
-        */
-
 
         //total num of words
         total = arrayList.size();
@@ -65,7 +58,6 @@ public class Data {
         for(int i = 0; (i <= (arrayList.size() - 1)) ; i++){
 
             word = arrayList.get(i);
-            System.out.println(word);
 
             if(amount.containsKey(word)){
                 amount.put(word,(amount.get(word)+1));
@@ -73,36 +65,39 @@ public class Data {
             else{
                 amount.put(word,1);
             }//end if
-
         }//end 4
-        System.out.println(amount);
 
         //sort map
         sortedMap = sortMapByValue(amount);
         System.out.println(sortedMap);
+
     }
 
 
     //methods
-    // to str
-    public String toString() {
+    public void print() {
         //to stop out of bounds exception:
         if(sortedMap.size() >= 3) {
-            return "The top 3 words are:\n" + sortedMap.keySet().toArray()[0] + ", " + sortedMap.keySet().toArray()[1] + " and "
-                    + sortedMap.keySet().toArray()[2];
+            Data.infoBox("The top 3 words in this file are:\n" + sortedMap.keySet().toArray()[0] + ", " + sortedMap.keySet().toArray()[1] + " and "
+                    + sortedMap.keySet().toArray()[2],"Top words");
+
         }
         else if(sortedMap.size() == 2){
-            return "The top 2 words are:\n" + sortedMap.keySet().toArray()[0] + " and " + sortedMap.keySet().toArray()[1];
+            Data.infoBox("The top 2 words in this file are:\n" + sortedMap.keySet().toArray()[0] + " and " + sortedMap.keySet().toArray()[1],
+                         "Top words");
+
         }
         else if(sortedMap.size() == 1){
-            return "The top word is:\n" + sortedMap.keySet().toArray()[0];
+            Data.infoBox("The top word int this file is:\n" + sortedMap.keySet().toArray()[0], "Top words");
+
         }
         else{
-            return "Nothing in file.";
+            Data.infoBox("Nothing in file","No words");
         }
     }
 
     //sort map
+    //code from https://www.programcreek.com/2013/03/java-sort-map-by-value/ ref:
     public static TreeMap<String, Integer> sortMapByValue(HashMap<String, Integer> map){
         Comparator<String> comparator = new ValueComparator(map);
         //TreeMap is a map sorted by its keys.
@@ -110,6 +105,24 @@ public class Data {
         TreeMap<String, Integer> result = new TreeMap<String, Integer>(comparator);
         result.putAll(map);
         return result;
+    }
+    //end of ref
+
+    //returns the sorted maps keys as array list
+    public ArrayList returnArray(){
+        ArrayList arr = new ArrayList();
+
+        for(int i = 0; i < sortedMap.size()-1; i++ ) {
+            arr.add(sortedMap.keySet().toArray()[i].toString());
+        }
+
+        return arr;
+    }
+
+    //info box pop up
+    public static void infoBox(String infoMessage, String titleBar)
+    {
+        JOptionPane.showMessageDialog(null, infoMessage, titleBar, JOptionPane.INFORMATION_MESSAGE);
     }
 
 }//end data

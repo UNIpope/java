@@ -1,4 +1,5 @@
 //code from https://www.programcreek.com/2013/03/java-sort-map-by-value/
+// this code is called when sorting a map
 
 package com.assignment;
 
@@ -22,3 +23,4 @@ class ValueComparator implements Comparator<String> {
         }
     }
 }
+//end of ref
