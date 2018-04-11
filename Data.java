@@ -55,7 +55,7 @@ public class Data {
         total = arrayList.size();
 
         //import into hash map and count each word
-        for(int i = 0; (i <= (arrayList.size() - 1)) ; i++){
+        for(int i = 0; (i <= (arrayList.size()-1)); i++){
 
             word = arrayList.get(i);
 
@@ -69,14 +69,17 @@ public class Data {
 
         //sort map
         sortedMap = sortMapByValue(amount);
-        System.out.println(sortedMap);
-
     }
 
 
     //methods
+    //shows up to top words
     public void print() {
         //to stop out of bounds exception:
+        double val;
+        double[] values = new double[4];
+        String[] names = new String[4];
+
         if(sortedMap.size() >= 3) {
             Data.infoBox("The top 3 words in this file are:\n" + sortedMap.keySet().toArray()[0] + ", " + sortedMap.keySet().toArray()[1] + " and "
                     + sortedMap.keySet().toArray()[2],"Top words");
@@ -94,6 +97,12 @@ public class Data {
         else{
             Data.infoBox("Nothing in file","No words");
         }
+
+        //bar chart
+        if(sortedMap.size() >= 3) {
+            bar();
+        }
+
     }
 
     //sort map
@@ -108,11 +117,46 @@ public class Data {
     }
     //end of ref
 
+    //bar call
+    public void bar(){
+        //var
+        double[] values = new double[4];
+        String[] names = new String[4];
+        int val;
+
+        //frame
+        JFrame f = new JFrame();
+        f.setSize(400, 300);
+
+        //map to array
+        val = (int)sortedMap.values().toArray()[0];
+        values[0] = val;
+        names[0] = sortedMap.keySet().toArray()[0].toString();
+
+        val = (int)sortedMap.values().toArray()[1];
+        values[1] = val;
+        names[1] = sortedMap.keySet().toArray()[1].toString();
+
+        val = (int)sortedMap.values().toArray()[2];
+        values[2] = val;
+        names[2] = sortedMap.keySet().toArray()[2].toString();
+
+        values[3] = total;
+        names[3] = "The rest";
+
+        //pass array to chart pannel
+        f.getContentPane().add(new ChartPanel(values, names, "The 3 top words vs the rest:"));
+        f.setVisible(true);
+
+
+
+    }
+
     //returns the sorted maps keys as array list
     public ArrayList returnArray(){
         ArrayList arr = new ArrayList();
 
-        for(int i = 0; i < sortedMap.size()-1; i++ ) {
+        for(int i = 0; i < sortedMap.size(); i++ ) {
             arr.add(sortedMap.keySet().toArray()[i].toString());
         }
 

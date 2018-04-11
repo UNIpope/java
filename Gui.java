@@ -13,7 +13,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Arrays;
 import javax.swing.*;
 import javax.swing.JOptionPane;
 
@@ -43,7 +42,7 @@ public class Gui extends JFrame implements ActionListener
         setLayout(new FlowLayout());
 
         //file chooser buttons
-        choose = new JButton(" Open first file ");
+        choose = new JButton(" Open first file   ");
         add(choose);
         choose.addActionListener(this);
 
@@ -52,7 +51,7 @@ public class Gui extends JFrame implements ActionListener
         choose2.addActionListener(this);
 
         //button to show top words
-        b1 = new JButton("Enter");
+        b1 = new JButton("          Get top words in both files             ");
         add(b1);
         b1.addActionListener(this);
 
@@ -73,16 +72,16 @@ public class Gui extends JFrame implements ActionListener
         {
             strdata2 = Gui.fileGui();
         }
-        else if (e.getSource() == b1){
-            System.out.println("before");
-            if((strdata.isEmpty())  || (strdata2.isEmpty())) {
-                String cmp = cmp(strdata, strdata2);
-                Gui.infoBox(cmp, "Topics:");
+        else if (e.getSource() == b1)
+        {
+            if ((strdata != null)||(strdata2 != null)){
+
+                DataHandler list = new DataHandler(strdata, strdata2);
+                Gui.infoBox(list.toString(), "Top words in common:");
             }
             else{
-                Gui.infoBox("select two files","Error");
+                Gui.infoBox("select both files please!", "Top words in common:");
             }
-
         }//end if
 
     }//end act listen
@@ -128,39 +127,9 @@ public class Gui extends JFrame implements ActionListener
         }//end if
 
         //print out Array of data
-        System.out.println(strdta.toString() );
+        System.out.println(strdta.toString()+"end of file");
         return strdta;
     }
 
-    public String cmp(ArrayList s1, ArrayList s2){
-        ArrayList<String> ar = new ArrayList<String>();;
-        String commonWD = "Please select files.";
-
-        if (s1.isEmpty() || s2.isEmpty()){
-            commonWD = "please select 2 files";
-            System.out.println("tits");
-        }
-        else {
-            for (int i = 0; i < s1.size() - 1; i++) {
-                System.out.println("how bout ashjbfdas");
-
-                if (!Arrays.asList(s1).contains(s2.get(i))){
-                    ar.add(s2.get(i).toString());
-                    System.out.println(s2.get(i) + " gagyayagagagyaga");
-                }
-
-            }
-        }
-
-        //check if ! emty write array to a str
-        if(!ar.isEmpty()) {
-            System.out.println(ar);
-            commonWD = ar.toString();
-        }
-
-        System.out.println(commonWD);
-
-        return commonWD;
-    }
 
 }//end gui
