@@ -26,8 +26,8 @@ public class DataHandler {
             commonWD = "please select 2 files";
         }
         else {
-            for (int i = 0; i < s1.size() - 1; i++) {
-                if (!Arrays.asList(s1).contains(s2.get(i))){
+            for (int i = 0; (i < s1.size() - 1) && (i < 5); i++) {
+                if (!Arrays.asList(s1).contains(s2.get(i))){ //if s1 !contain s2
                     ar.add(s2.get(i).toString());
                 }//end if
             }//end 4
@@ -35,10 +35,11 @@ public class DataHandler {
 
         //check if ! empty write array to a str
         if(!ar.isEmpty()) {
-            for(int i = 0; i < ar.size(); i++){
+            for(int i = 0; i < ar.size() - 1; i++){
                 commonWD = commonWD + ar.get(i) + ", ";
                 System.out.println(ar.get(i));
             }
+            commonWD = commonWD + ar.get(ar.size() - 1) +".";
         }
 
         System.out.println(commonWD);
