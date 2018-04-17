@@ -18,3 +18,17 @@ to be added to the stop word list, and the analysis re-run.
 •What else can you come up with?
 
 --------------------------------------------------------------------------------------------------------------------------------
+
+video:
+https://www.youtube.com/watch?v=XT3m2x81hZw&feature=youtu.be
+
+GIT:
+https://github.com/UNIpope/java
+
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+Acknowledgments:
+- https://www.programcreek.com/2013/03/java-sort-map-by-value/
+- https://stackoverflow.com/questions/6849151/bar-chart-in-java
+- https://www.mkyong.com/swing/java-swing-jfilechooser-example
